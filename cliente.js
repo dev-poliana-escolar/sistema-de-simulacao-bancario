@@ -14,5 +14,7 @@ class Cliente {
         this.#_renda_bruta = renda_bruta;
         this.#_telefone = telefone;
     }
+    get renda_bruta() { return this.#_renda_bruta; }
 }
 exports.Cliente = Cliente;
+//# sourceMappingURL=cliente.js.map
