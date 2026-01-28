@@ -3,19 +3,19 @@ import { Funcionario } from "./funcionario";
 
 
 export  class Conta{
-    #_id : number;
-    #_titular : Cliente
+    #_cliente_titular: Cliente;
     #_data_criacao :string;
     #_saldo: number;
 
-    constructor (id :number, cliente_titular: Cliente,data_criacao: string, saldo:number){
-        this.#_id = id;
+    constructor (cliente : Cliente,data_criacao: string, saldo:number){
         this.#_data_criacao = data_criacao;
         this.#_saldo = saldo
-        this.#_titular = cliente_titular;
+        this.#_cliente_titular = cliente
     }
 
-    set novo_saldo(valor: number){ this.#_saldo = valor;}
+    get cliente(){return this.#_cliente_titular}
+    get data_criacao(){return this.#_data_criacao}
+
 
     consultarSaldo() :number{
         return this.#_saldo
@@ -23,7 +23,7 @@ export  class Conta{
 
     creditarQuantia(valor: number) :boolean{
         let saldo_atual = this.consultarSaldo();
-        if (valor >0){
+        if (valor > 0){
             let creditar = saldo_atual + valor 
             this.#_saldo = creditar;
             return true
@@ -45,29 +45,40 @@ export  class Conta{
         return true
     }
 
-    transferirQuantia(valor:number):{
+    transferirQuantia(valor_transferencia:number, conta_destino:Conta){
        /* Uma transferência corresponde: 
         ao débito de uma quantia da conta de origem e o crédito dessa
         quantia na conta de destino.
         */
+        if(conta_destino){
+            this.debitarQuantia(valor_transferencia);// debitar o saldo da conta origem
+
+            // creditar na conta destino
+            conta_destino.creditarQuantia(valor_transferencia);
+            return true
+        }
+
+        return false
     }
 
 }
 
-let fun1 = new Funcionario(1240, "Pedro Jordão");
 
-let cli = new Cliente("Joana", '22222', '31/nov/1990', 2000,'223344');
-let cli2 = new Cliente("Ana", '44444','12/jan/2009',21.40,'556677');
 
-let c = new Conta(1,cli,'25/jan/2026', 20);
-c.creditarQuantia(20);
-c.creditarQuantia(15);
-let cDestino = new Conta(2,cli2,"31/dez/2025", 0)
+
+// let c = new Conta(cli,'25/jan/2026', 20);
+// c.creditarQuantia(20);
+// c.creditarQuantia(15);
+// let cDestino = new Conta(cli2,"31/dez/2025", 0)
+// c.transferirQuantia(10,cDestino)
+// console.log(cDestino.consultarSaldo())
+// console.log(c.consultarSaldo())
 
 
 
 
 export class ContaCorrente extends Conta{
+
 
 
 }

@@ -1,20 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ContaPoupança = exports.ContaCorrente = exports.Conta = void 0;
-const cliente_1 = require("./cliente");
-const funcionario_1 = require("./funcionario");
 class Conta {
-    #_id;
-    #_titular;
+    #_cliente_titular;
     #_data_criacao;
     #_saldo;
-    constructor(id, cliente_titular, data_criacao, saldo) {
-        this.#_id = id;
+    constructor(cliente, data_criacao, saldo) {
         this.#_data_criacao = data_criacao;
         this.#_saldo = saldo;
-        this.#_titular = cliente_titular;
+        this.#_cliente_titular = cliente;
     }
-    set novo_saldo(valor) { this.#_saldo = valor; }
+    get cliente() { return this.#_cliente_titular; }
+    get data_criacao() { return this.#_data_criacao; }
     consultarSaldo() {
         return this.#_saldo;
     }
@@ -36,18 +33,32 @@ class Conta {
         this.#_saldo = debitar;
         return true;
     }
+    transferirQuantia(valor_transferencia, conta_destino) {
+        /* Uma transferência corresponde:
+         ao débito de uma quantia da conta de origem e o crédito dessa
+         quantia na conta de destino.
+         */
+        if (conta_destino) {
+            this.debitarQuantia(valor_transferencia); // debitar o saldo da conta origem
+            // creditar na conta destino
+            conta_destino.creditarQuantia(valor_transferencia);
+            return true;
+        }
+        return false;
+    }
 }
 exports.Conta = Conta;
-let fun1 = new funcionario_1.Funcionario(1240, "Pedro Jordão");
-let cli = new cliente_1.Cliente("Joana", '22222', '31/nov/1990', 2000, '223344');
-let cli2 = new cliente_1.Cliente("Ana", '44444', '12/jan/2009', 21.40, '556677');
-let c = new Conta(1, cli, '25/jan/2026', 20);
-c.creditarQuantia(20);
-c.creditarQuantia(15);
-let cDestino = new Conta(2, cli2, "31/dez/2025", 0);
+// let c = new Conta(cli,'25/jan/2026', 20);
+// c.creditarQuantia(20);
+// c.creditarQuantia(15);
+// let cDestino = new Conta(cli2,"31/dez/2025", 0)
+// c.transferirQuantia(10,cDestino)
+// console.log(cDestino.consultarSaldo())
+// console.log(c.consultarSaldo())
 class ContaCorrente extends Conta {
 }
 exports.ContaCorrente = ContaCorrente;
 class ContaPoupança extends Conta {
 }
 exports.ContaPoupança = ContaPoupança;
+//# sourceMappingURL=conta.js.map
