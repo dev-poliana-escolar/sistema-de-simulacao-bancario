@@ -45,7 +45,7 @@ export class Funcionario{
         O dinheiro pedido deve ser creditado na conta do cliente
         caso o empréstimo seja autorizado (operação autorizar empréstimo).
         */
-       if( this.autorizarEmprestimo(conta.cliente, valor_emprestimo) === true){
+       if( this.autorizarEmprestimo(conta.cliente, valor_emprestimo)){
             conta.creditarQuantia(valor_emprestimo);
             return true
        }
