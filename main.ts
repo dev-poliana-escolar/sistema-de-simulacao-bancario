@@ -7,7 +7,7 @@ import { Funcionario } from "./funcionario";
 let lista_contas : Conta[] =[]
 
 let fun1 = new Funcionario(1240, "Pedro Jordão");
-let fun2 = new Funcionario(2345, 'Thiago Lindo Gostoso Silvestre')
+let fun2 = new Funcionario(2345, 'Thiago')
 
 let cli = new Cliente("Joana", '22222', '31/nov/1990', 2000,'223344');
 let cli2 = new Cliente("Ana", '44444','12/jan/2009',21.40,'556677');
