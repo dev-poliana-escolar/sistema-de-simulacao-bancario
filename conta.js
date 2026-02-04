@@ -56,9 +56,15 @@ exports.Conta = Conta;
 // console.log(cDestino.consultarSaldo())
 // console.log(c.consultarSaldo())
 class ContaCorrente extends Conta {
+    constructor(cliente, data_criacao, saldo) {
+        super(cliente, data_criacao, saldo);
+    }
 }
 exports.ContaCorrente = ContaCorrente;
 class ContaPoupança extends Conta {
+    constructor(cliente, data_criacao, saldo) {
+        super(cliente, data_criacao, saldo);
+    }
 }
 exports.ContaPoupança = ContaPoupança;
 //# sourceMappingURL=conta.js.map

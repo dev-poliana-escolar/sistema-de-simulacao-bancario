@@ -9,10 +9,15 @@ class Funcionario {
         this.#_matricula = matricula;
         this.#_nome = nome;
     }
-    abrirConta(cliente, saldo_inicial) {
+    abrirContaCorrente(cliente, saldo_inicial) {
         const data_atual = new Date();
-        let c = new conta_1.Conta(cliente, data_atual.toLocaleDateString("pt-BR"), saldo_inicial);
-        return c;
+        let conta_corrente = new conta_1.ContaCorrente(cliente, data_atual.toLocaleDateString("pt-BR"), saldo_inicial);
+        return conta_corrente;
+    }
+    abrirContaPoupanca(cliente, saldo_inicial) {
+        const data_atual = new Date();
+        let conta_poupanca = new conta_1.ContaPoupança(cliente, data_atual.toLocaleDateString("pt-BR"), saldo_inicial);
+        return conta_poupanca;
     }
     autorizarEmprestimo(cliente, valor_emprestimo) {
         /*

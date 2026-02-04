@@ -1,5 +1,5 @@
 import { Cliente } from "./cliente";
-import { Conta } from "./conta";
+import { Conta, ContaCorrente, ContaPoupança } from "./conta";
 
 
 
@@ -13,10 +13,16 @@ export class Funcionario{
         this.#_nome = nome;
     }
 
-    abrirConta(cliente:Cliente, saldo_inicial:number): Conta{
+    abrirContaCorrente(cliente:Cliente, saldo_inicial:number): ContaCorrente{
         const data_atual = new Date()
-        let c = new Conta(cliente,data_atual.toLocaleDateString("pt-BR"),saldo_inicial)
-        return c
+        let conta_corrente = new ContaCorrente(cliente,data_atual.toLocaleDateString("pt-BR"),saldo_inicial)
+        return conta_corrente
+    }
+
+    abrirContaPoupanca(cliente:Cliente, saldo_inicial:number): ContaPoupança{
+        const data_atual = new Date()
+        let conta_poupanca = new ContaPoupança(cliente,data_atual.toLocaleDateString("pt-BR"),saldo_inicial)
+        return conta_poupanca
     }
 
     autorizarEmprestimo(cliente:Cliente, valor_emprestimo:number):boolean{ 
@@ -45,9 +51,6 @@ export class Funcionario{
        }
        return false
         
-       
-
-
     }
 }
 

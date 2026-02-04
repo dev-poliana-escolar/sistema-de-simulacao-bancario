@@ -2,7 +2,7 @@ import { Cliente } from "./cliente";
 import { Funcionario } from "./funcionario";
 
 
-export  class Conta{
+export  abstract class Conta{
     #_cliente_titular: Cliente;
     #_data_criacao :string;
     #_saldo: number;
@@ -78,11 +78,15 @@ export  class Conta{
 
 
 export class ContaCorrente extends Conta{
-
-
+    constructor(cliente:Cliente, data_criacao:string, saldo:number){
+        super(cliente, data_criacao,saldo)
+    }
 
 }
 
 export class ContaPoupança extends Conta{
+    constructor(cliente:Cliente, data_criacao:string, saldo:number){
+        super(cliente, data_criacao,saldo)
+    }
 
 }
